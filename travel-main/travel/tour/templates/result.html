@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">Available Buses - BusEase</title>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body id="result-body">
+
+<header id="header">
+    <h1 id="headerTitle">Available Buses</h1>
+    <p id="headerSubtitle">Choose your preferred bus and book your seat</p>
+</header>
+
+<div id="container">
+
+    {% for bus in buses %}
+    <!-- BUS CARD -->
+    <div class="bus-card">
+
+        <span class="tag">{{ bus.tag }}</span>
+
+        <div class="bus-title">{{ bus.name }}</div>
+
+        <div class="details">Seats Available: {{ bus.seats }}</div>
+
+        <div class="details price">Price: ₹{{ bus.price }}</div>
+
+        <div class="details">Departure: {{ bus.time }}</div>
+
+        <a href="{% url 'booking' %}?bus={{ bus.id }}" class="btn">Book Now</a>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

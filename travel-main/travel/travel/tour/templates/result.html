@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">Available Buses - BusEase</title>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body id="result-body">
+
+<header id="header">
+    <h1 id="headerTitle">Available Buses</h1>
+    <p id="headerSubtitle">Choose your preferred bus and book your seat</p>
+</header>
+
+<div id="container">
+
+    <!-- BUS CARD 1 -->
+    <div id="bus1" class="bus-card">
+
+        <span id="tag1" class="tag">Popular</span>
+
+        <div id="busTitle1" class="bus-title">Fast Travel</div>
+
+        <div id="seats1" class="details">Seats Available: 20</div>
+
+        <div id="price1" class="details price">Price: ₹500</div>
+
+        <div id="departure1" class="details">Departure: 12:00 AM</div>
+
+        <a id="bookBtn1" href="/booking/" class="btn">Book Now</a>
+
+    </div>
+
+    <!-- BUS CARD 2 -->
+    <div id="bus2" class="bus-card">
+
+        <span id="tag2" class="tag">Premium</span>
+
+        <div id="busTitle2" class="bus-title">Super Fast</div>
+
+        <div id="seats2" class="details">Seats Available: 15</div>
+
+        <div id="price2" class="details price">Price: ₹700</div>
+
+        <div id="departure2" class="details">Departure: 6:00 PM</div>
+
+        <a id="bookBtn2" href="/booking/" class="btn">Book Now</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

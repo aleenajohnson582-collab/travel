@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Confirmation</title>
+</head>
+<body>
+
+    <h1>Booking Confirmed ✅</h1>
+
+    <p><b>Name:</b> {{ booking.name }}</p>
+    <p><b>Phone:</b> {{ booking.phone }}</p>
+    <p><b>Email:</b> {{ booking.email }}</p>
+
+    <p><b>Bus:</b> {{ booking.bus.name }}</p>
+    <p><b>From:</b> {{ booking.bus.source }}</p>
+    <p><b>To:</b> {{ booking.bus.destination }}</p>
+
+    <p><b>Seats:</b> {{ booking.seats }}</p>
+
+    <h3>Thank you for booking 🎉</h3>
+
+    <a href="/">Go to Home</a>
+
+</body>
+</html>

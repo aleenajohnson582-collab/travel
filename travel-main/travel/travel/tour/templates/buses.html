@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buses</title>
+</head>
+<body>
+
+    <h1>Available Buses</h1>
+
+    {% if buses %}
+
+        {% for bus in buses %}
+
+            <div style="border:1px solid black; padding:10px; margin:10px;">
+
+                <h3>{{ bus.name }}</h3>
+
+                <p><b>From:</b> {{ bus.source }}</p>
+                <p><b>To:</b> {{ bus.destination }}</p>
+                <p><b>Total Seats:</b> {{ bus.seats }}</p>
+
+                <!-- Book button -->
+                <a href="/booking/?bus_id={{ bus.id }}">
+                    <button>Book Now</button>
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+        <p>No buses available</p>
+    {% endif %}
+
+</body>
+</html>

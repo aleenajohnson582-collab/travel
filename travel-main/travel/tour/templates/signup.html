@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - BusEase</title>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body id="signup-body">
+
+<!-- BACK BUTTON -->
+<div id="backBtn">
+    <a id="homeLink" href="{% url 'index' %}">← Home</a>
+</div>
+
+<!-- CONTAINER -->
+<div id="container">
+
+    <!-- HEADER -->
+    <div id="header">
+        <h1 id="headerTitle">Create Account</h1>
+        <p id="headerSubtitle">Join us and start booking buses today</p>
+    </div>
+
+    <!-- MESSAGES -->
+    {% if messages %}
+    <div id="messages">
+        {% for message in messages %}
+            <p class="{{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- FORM -->
+    <form id="signupForm" method="post" autocomplete="on">
+        {% csrf_token %}
+
+        <div id="nameRow" class="form-row">
+
+            <div id="firstNameGroup" class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" required>
+            </div>
+
+            <div id="lastNameGroup" class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" required>
+            </div>
+
+        </div>
+
+        <div id="emailGroup" class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div id="phoneGroup" class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+        </div>
+
+        <div id="passwordRow" class="form-row">
+
+            <div id="passwordGroup" class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required minlength="8">
+            </div>
+
+            <div id="confirmPasswordGroup" class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
+
+        </div>
+
+        <button type="submit" id="signupBtn">Create Account</button>
+
+    </form>
+
+    <!-- HOME BUTTON -->
+    <div id="homeButtonWrapper">
+        <a href="{% url 'home' %}" id="homeBtn">Go to Home</a>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer">
+        Already have an account?
+        <a href="{% url 'login' %}" id="loginLink">Sign In</a>
+    </div>
+
+</div>
+
+</body>
+</html>

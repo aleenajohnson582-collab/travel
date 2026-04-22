@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title id="title">Booking Confirmation - BusEase</title>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body id="confirmation-body">
+
+<div id="container">
+    
+    <div id="bookingDetails">
+    <h3>Your Booking Details</h3>
+
+
+    <p><strong>Name:</strong> {{ booking.name }}</p>
+<p><strong>Bus:</strong> {{ booking.bus_name }}</p>
+<p><strong>From:</strong> {{ booking.from_place }}</p>
+<p><strong>To:</strong> {{ booking.to_place }}</p>
+<p><strong>Date:</strong> {{ booking.travel_date }}</p>
+<p><strong>Seats:</strong> {{ booking.seats }}</p>
+</div>
+
+    <div id="icon">✔</div>
+
+    <h2 id="titleText">Booking Successful</h2>
+
+    <p id="message1">Your ticket has been booked successfully.</p>
+    <p id="message2">Thank you for choosing BusEase.</p>
+
+    <a id="homeBtn" href="{% url 'home' %}">Go to Home</a>
+
+</div>
+
+</body>
+</html>

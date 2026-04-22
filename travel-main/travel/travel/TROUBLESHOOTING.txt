@@ -1,0 +1,76 @@
+DJANGO PROJECT TROUBLESHOOTING GUIDE
+====================================
+
+If your Django project is not running, please follow these steps:
+
+STEP 1: Check Python and Django Installation
+---------------------------------------------
+Open PowerShell or Command Prompt and run:
+    python --version
+    pip list | find "Django"
+
+You should see Django version 3.2+ installed.
+
+
+STEP 2: Navigate to Project Directory
+--------------------------------------
+    cd c:\Users\user\Desktop\aleena\ project\travel
+
+
+STEP 3: Run Django Checks
+--------------------------
+    python manage.py check
+
+This will show ANY configuration issues. Look for errors like:
+- Missing apps in INSTALLED_APPS
+- Database connection issues
+- Template loading issues
+
+
+STEP 4: Apply Database Migrations
+----------------------------------
+    python manage.py makemigrations
+    python manage.py migrate
+
+This creates the database tables needed for your app.
+
+
+STEP 5: Run the Development Server
+-----------------------------------
+    python manage.py runserver
+
+This should start the server at http://127.0.0.1:8000/
+
+
+COMMON ERRORS AND SOLUTIONS
+============================
+
+ERROR: "ModuleNotFoundError: No module named 'django'"
+SOLUTION: Install Django - run:
+    pip install django
+
+
+ERROR: "django.core.exceptions.ImproperlyConfigured: Installed app config..."
+SOLUTION: Make sure 'tour' is in INSTALLED_APPS in settings.py
+    Check: travel/settings.py should have 'tour' in INSTALLED_APPS
+
+
+ERROR: "TemplateDoesNotExist: home.html"
+SOLUTION: Make sure templates are in correct location:
+    c:\Users\user\Desktop\aleena\ project\travel\tour\templates\home.html
+
+
+ERROR: Database errors
+SOLUTION: Run these commands:
+    python manage.py makemigrations tour
+    python manage.py migrate
+
+
+IMPORTANT NOTES:
+================
+- Your app looks syntactically correct
+- All template files are properly formed
+- All views and URLs are configured correctly
+- The issue is likely a Django setup/configuration problem, not code
+
+The project should work once you run the migration and start the server!

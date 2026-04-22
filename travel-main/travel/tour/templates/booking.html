@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title id="title">Passenger Booking - BusEase</title>
+
+<!-- Django static file properly used -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body id="booking-body">
+
+<div id="container">
+
+    <h1 id="headerTitle">Passenger Details</h1>
+
+    {% if selected_bus %}
+    <div id="busInfo">
+        <h3>Selected Bus: {{ selected_bus.name }}</h3>
+        <p>Departure Time: {{ selected_bus.time }}</p>
+    </div>
+    {% endif %}
+
+    {% if messages %}
+    <div id="messages">
+        {% for message in messages %}
+            <p class="{{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form id="bookingForm" action="{% url 'booking' %}" method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="name" id="labelName">Full Name</label>
+            <input id="name" type="text" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="age" id="labelAge">Age</label>
+            <input id="age" type="number" name="age" required>
+        </div>
+
+        <div class="form-group">
+            <label for="gender" id="labelGender">Gender</label>
+            <select id="gender" name="gender" required>
+                <option value="">--Select--</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="phone" id="labelPhone">Phone Number</label>
+            <input id="phone" type="tel" name="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email" id="labelEmail">Email Address</label>
+            <input id="email" type="email" name="email">
+        </div>
+
+        <div class="form-group">
+            <label for="date" id="labelDate">Travel Date</label>
+            <input id="date" type="date" name="date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="from" id="labelFrom">From</label>
+            <input id="from" type="text" name="from" placeholder="Departure city" required>
+        </div>
+
+        <div class="form-group">
+            <label for="to" id="labelTo">To</label>
+            <input id="to" type="text" name="to" placeholder="Destination city" required>
+        </div>
+
+        <div class="form-group">
+            <label for="seats" id="labelSeats">Number of Seats</label>
+            <input id="seats" type="number" name="seats" min="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="seatClass" id="labelClass">Seat Class</label>
+            <select id="seatClass" name="seat_class">
+                <option>Economy</option>
+                <option>Premium Economy</option>
+                <option>Business</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="notes" id="labelNotes">Special Requests</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Any special requirements..."></textarea>
+        </div>
+
+        <!-- Hidden fields for bus details -->
+        <input type="hidden" name="bus_name" value="{{ selected_bus.name|default:'Selected Bus' }}">
+        <input type="hidden" name="travel_time" value="{{ selected_bus.time|default:'12:00 PM' }}">
+    
+        <input id="submitBtn" type="submit" value="Confirm Booking">
+
+    </form>
+
+</div>
+
+</body>
+</html>

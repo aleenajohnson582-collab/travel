@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusEase - Book Bus Tickets Easily</title>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body id="index-body">
+
+    <!-- HEADER -->
+    <header id="header">
+
+        <div id="logo">BusEase</div>
+
+        <!-- LOGIN BUTTON -->
+        <a href="{% url 'login' %}" class="btn login-btn">
+            Login
+        </a>
+
+        <!-- SIGNUP BUTTON -->
+        <a href="{% url 'signup' %}" class="btn signup-btn">
+            Sign Up
+        </a>
+
+        
+
+    </header>
+
+    <!-- MAIN SECTION -->
+    <main id="main">
+
+        <h1 id="mainTitle">Simple & Fast Bus Booking</h1>
+
+        <p id="mainDesc">
+            BusEase helps you search, compare, and book bus tickets quickly and easily.
+            Travel smarter with a smooth booking experience.
+        </p>
+
+        <!-- SEARCH BUTTON -->
+        <a href="{% url 'home' %}" class="btn search-btn">
+            Search Buses
+        </a>
+
+    </main>
+
+</body>
+</html>

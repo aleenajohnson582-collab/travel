@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - BusEase</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body id="login-body">
+
+    <!-- BACK TO HOME -->
+    <a href="{% url 'index' %}">← Back to Home</a>
+
+    <h2>Login</h2>
+
+    <!-- MESSAGES -->
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <!-- LOGIN FORM -->
+    <form method="post">
+        {% csrf_token %}
+
+        <label>Email</label><br>
+        <input type="email" name="email" required>
+        <br><br>
+
+        <label>Password</label><br>
+        <input type="password" name="password" required>
+        <br><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <br>
+
+    <!-- SIGNUP LINK -->
+    <p>
+        Don't have an account?
+        <a href="{% url 'signup' %}">Sign Up</a>
+    </p>
+
+</body>
+</html>
