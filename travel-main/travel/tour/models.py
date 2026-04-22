@@ -15,6 +15,8 @@ class Profile(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 class Booking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # ✅ ADD THIS
+
     name = models.CharField(max_length=100)
     is_approved = models.BooleanField(default=False)
     from_place = models.CharField(max_length=100)
@@ -23,7 +25,7 @@ class Booking(models.Model):
     seats = models.IntegerField()
     bus_name = models.CharField(max_length=100)
     travel_time = models.TimeField()
-    
+
     def __str__(self):
         return self.name
  

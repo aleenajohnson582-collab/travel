@@ -7,65 +7,63 @@
     <title>Bus Booking - Travel Made Easy</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    
-
     <script>
         function toggleReturnDate(select) {
             const returnDiv = document.getElementById("returnDateDiv");
-            returnDiv.style.display = select.value === "round" ? "block" : "none";
+            if (returnDiv) {
+                returnDiv.style.display = select.value === "round" ? "block" : "none";
+            }
         }
     </script>
 </head>
-
 <body id="home-body">
 
-<!-- Navigation Bar -->
 <nav>
     <a href="{% url 'home' %}" class="logo">
         <i class="fas fa-bus"></i> TravelBus
     </a>
-    
+
     <ul class="nav-links">
         <li><a href="{% url 'contact' %}"><i class="fas fa-envelope"></i> Contact</a></li>
     </ul>
 
     <div class="user-info">
-        {% if user.is_authenticated %}
-            <span class="user-name">
-                <i class="fas fa-user-circle"></i> {{ user.first_name }}
-            </span>
-            <a href="{% url 'logout' %}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        {% else %}
-            <a href="{% url 'login' %}" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</a>
-            <a href="{% url 'signup' %}" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
-        {% endif %}
-        {% if request.user.is_staff %}
-    <a href="{% url 'view_messages' %}" class="messages-btn">
-        <i class="fas fa-envelope"></i> View Messages
-    </a>
-{% endif %}
+        <a href="{% url 'view_booking' %}" class="my-booking-btn">
+            <i class="fas fa-ticket-alt"></i> My Bookings
+        </a>
 
+        {% if user.is_authenticated %}
+        <span class="user-name">
+            <i class="fas fa-user-circle"></i> {{ user.first_name }}
+        </span>
+        <a href="{% url 'logout' %}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="{% url 'signup' %}" class="signup-btn"><i class="fas fa-user-plus"></i> Sign Up</a>
+        {% endif %}
+
+        {% if request.user.is_staff %}
+        <a href="{% url 'view_messages' %}" class="messages-btn">
+            <i class="fas fa-envelope"></i> View Messages
+        </a>
+        {% endif %}
     </div>
 </nav>
 
-<!-- Messages -->
 {% if messages %}
 <div class="container" style="margin-top: 30px; margin-bottom: 10px;">
     <div class="messages">
         {% for message in messages %}
-            <p class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
+        <p class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
         {% endfor %}
     </div>
 </div>
 {% endif %}
 
-<!-- Main Container -->
 <div class="container">
     <h1><i class="fas fa-bus"></i> Find Your Journey</h1>
 
     <form method="get" action="{% url 'result' %}">
-        
         <div class="form-group">
             <label><i class="fas fa-map-marker-alt"></i> From:</label>
             <input type="text" name="from" placeholder="Enter departure city" required>
@@ -107,30 +105,36 @@
     </form>
 
     <div class="button-group">
-        <a href="{% url 'contact' %}">
-            <button type="button" class="btn btn-secondary"><i class="fas fa-envelope"></i> Contact Us</button>
-        </a>
+        <a href="{% url 'contact' %}" class="btn btn-secondary"><i class="fas fa-envelope"></i> Contact Us</a>
     </div>
 
     <div class="footer">
-        <p>© 2026 TravelBus | Safe & Easy Travel</p>
+        <p>&copy; 2026 TravelBus | Safe & Easy Travel</p>
         <p style="margin-top: 10px; font-size: 12px;">Your trusted bus booking partner</p>
     </div>
 </div>
+
 {% if request.user.is_superuser %}
-<h2>pendeng bookings</h2>
-{% for booking in pending_bookings %}
-    <div>
-        <h3>{{ booking.name }}</h3>
-        <p>{{ booking.bus_name }}</p>
-        <p>{{ booking.from_place }} to {{ booking.to_place }}</p>
-        <p>{{ booking.travel_date }}</p>
-        <p>{{ booking.seats }} seats</p>
-        <a href="{% url 'approve_booking' booking.id %}"><button>Approve</button></a>
+<section class="pending-bookings">
+    <h2>Pending Bookings</h2>
+    <div class="pending-bookings-grid">
+        {% for booking in pending_bookings %}
+        <div class="pending-card">
+            <h3>{{ booking.name }}</h3>
+            <p>{{ booking.bus_name }}</p>
+            <p>{{ booking.from_place }} to {{ booking.to_place }}</p>
+            <p>{{ booking.travel_date }}</p>
+            <p>{{ booking.seats }} seats</p>
+            <a href="{% url 'approve_booking' booking.id %}" class="btn">Approve</a>
+        </div>
+        {% empty %}
+        <div class="pending-card">
+            <p>No pending bookings right now.</p>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+</section>
 {% endif %}
-        
 
 </body>
 </html>

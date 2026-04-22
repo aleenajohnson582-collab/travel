@@ -99,8 +99,9 @@
 
         <!-- Hidden fields for bus details -->
         <input type="hidden" name="bus_name" value="{{ selected_bus.name|default:'Selected Bus' }}">
-        <input type="hidden" name="travel_time" value="{{ selected_bus.time|default:'12:00 PM' }}">
+        <input type="hidden" name="travel_time" value="{{ selected_bus.time }}">
     
+
         <input id="submitBtn" type="submit" value="Confirm Booking">
 
     </form>

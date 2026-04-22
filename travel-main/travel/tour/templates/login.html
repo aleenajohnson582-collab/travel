@@ -3,57 +3,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - BusEase</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
-
 <body id="login-body">
 
-    <!-- BACK BUTTON -->
     <div id="homeLinkWrapper">
-        <a href="{% url 'index' %}" id="homeLink">← Back to Home</a>
+        <a href="{% url 'index' %}" id="homeLink">&larr; Back to Home</a>
     </div>
 
-    <!-- CONTAINER -->
     <div id="loginContainer">
-
-        <!-- TITLE -->
         <h2 id="loginTitle">Login</h2>
 
-        <!-- MESSAGES -->
         {% if messages %}
         <div id="messageBox">
             {% for message in messages %}
-                <p>{{ message }}</p>
+            <p class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
             {% endfor %}
         </div>
         {% endif %}
 
-        <!-- LOGIN FORM -->
         <form method="post" id="loginForm">
             {% csrf_token %}
 
-            <label id="emailLabel">Email</label><br>
-            <input type="text" name="username">
-            <br><br>
+            <div class="form-group">
+                <label id="emailLabel" for="username">Email</label>
+                <input type="text" id="username" name="username" required>
+            </div>
 
-            <label id="passwordLabel">Password</label><br>
-            <input type="password" id="passwordInput" name="password" required>
-            <br><br>
+            <div class="form-group">
+                <label id="passwordLabel" for="passwordInput">Password</label>
+                <input type="password" id="passwordInput" name="password" required>
+            </div>
 
             <button type="submit" id="loginButton">Login</button>
         </form>
 
-        <br>
-
-        <!-- SIGNUP LINK -->
         <div id="signupWrapper">
             <p>
                 Don't have an account?
                 <a href="{% url 'signup' %}" id="signupLink">Sign Up</a>
             </p>
         </div>
-
     </div>
 
 </body>

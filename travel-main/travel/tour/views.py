@@ -95,15 +95,16 @@ def booking(request):
             return redirect(request.path)
 
         try:
-            Booking.objects.create(
-               name=name,
-               from_place=from_place,
-               to_place=to_place,
-               travel_date=travel_date,
-               seats=int(seats),
-               bus_name=bus_name,
-               travel_time=travel_time
-           )
+            booking = Booking.objects.create(
+    user=request.user,   # ✅ THIS IS MISSING (main fix)
+    name=name,
+    from_place=from_place,
+    to_place=to_place,
+    travel_date=travel_date,
+    seats=seats,
+    bus_name=bus_name,
+    travel_time=travel_time
+)
             
 
             messages.success(request, "Booking confirmed!")
@@ -203,4 +204,14 @@ def approve_booking(request, id):
     messages.success(request, "Booking approved successfully!")
     return redirect('home')
 
+
+
+
+@login_required
+def view_booking(request):
+    bookings = Booking.objects.filter(user=request.user).order_by('-id')
+
+    return render(request, 'view_booking.html', {
+        'bookings': bookings
+    })
 

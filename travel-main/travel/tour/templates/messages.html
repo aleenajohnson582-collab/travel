@@ -1,8 +1,31 @@
-<h2>Contact Messages</h2>
- {% for msg in messages %}
- <div style="border: 1px solid #070101da; padding: 10px; margin-bottom: 10px;">
-  <p><b>Name:</b> {{ msg.name }}</p>
-  <p><b>Email:</b> {{ msg.email }}</p>
-  <p><b>Message:</b> {{ msg.message }}</p>
- </div>
- {% endfor %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Messages</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body id="message_body">
+
+<h2 class="page-title">Contact Messages</h2>
+
+<div class="message-container">
+
+    {% for msg in messages %}
+    <div class="message-card">
+
+        <p><b>Name:</b> {{ msg.name }}</p>
+        <p><b>Email:</b> {{ msg.email }}</p>
+        <p><b>Message:</b> {{ msg.message }}</p>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
