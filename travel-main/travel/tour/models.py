@@ -16,6 +16,7 @@ class Profile(models.Model):
 
 class Booking(models.Model):
     name = models.CharField(max_length=100)
+    is_approved = models.BooleanField(default=False)
     from_place = models.CharField(max_length=100)
     to_place = models.CharField(max_length=100)
     travel_date = models.DateField()

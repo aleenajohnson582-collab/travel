@@ -117,6 +117,20 @@
         <p style="margin-top: 10px; font-size: 12px;">Your trusted bus booking partner</p>
     </div>
 </div>
+{% if request.user.is_superuser %}
+<h2>pendeng bookings</h2>
+{% for booking in pending_bookings %}
+    <div>
+        <h3>{{ booking.name }}</h3>
+        <p>{{ booking.bus_name }}</p>
+        <p>{{ booking.from_place }} to {{ booking.to_place }}</p>
+        <p>{{ booking.travel_date }}</p>
+        <p>{{ booking.seats }} seats</p>
+        <a href="{% url 'approve_booking' booking.id %}"><button>Approve</button></a>
+    </div>
+    {% endfor %}
+{% endif %}
+        
 
 </body>
 </html>

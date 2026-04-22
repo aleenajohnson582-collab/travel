@@ -2,7 +2,8 @@ import email
 from urllib import request
 
 from django import forms
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
+from django.http import HttpResponse
 from django.contrib import messages
 from .models import Booking, Contact
 from django.contrib.auth.models import User
@@ -13,7 +14,12 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 
 def home(request):
-    return render(request, 'home.html')
+    approved_bookings = Booking.objects.filter(is_approved=True)
+    pending_bookings = Booking.objects.filter(is_approved=False)
+    return render(request, 'home.html', {
+        'bookings': approved_bookings,
+        'pending_bookings': pending_bookings
+    })
 
 
 def signup(request):
@@ -184,5 +190,17 @@ def logout_view(request):
 
 def index(request):
     return render(request, 'index.html')
+
+
+@login_required
+def approve_booking(request, id):
+    if not request.user.is_superuser:
+        
+        return HttpResponse("You are not autherized to approve booking.")
+    booking = get_object_or_404(Booking, id=id)
+    booking.is_approved = True
+    booking.save()
+    messages.success(request, "Booking approved successfully!")
+    return redirect('home')
 
 
